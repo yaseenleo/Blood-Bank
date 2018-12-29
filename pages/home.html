@@ -44,8 +44,8 @@
         <div class="container">
             <div class="text">
                 <div class="row">
-                    <div class="col-6">
-                        <h3>Name: <span id="name"></span></h3>
+                    <div class="col-12">
+                        <h3 class="text-center">Welcome <span id="name"></span></h3>
                     </div>
                 </div>
                <div class="row">
@@ -55,6 +55,35 @@
                </div>
             </div>
         </div>
+
+        <!-- modal -->
+        <div class="modal fade" id="userinfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="userAction"></h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="container">
+                    <p>Name: <span id="username"></span></p>
+                    <p>email: <span id="useremail"></span></p>
+                    <p>Age: <span id="userage"></span></p>
+                    <p>Gender: <span id="usergender"></span></p>
+                    <p>Blood Group: <span id="userblood"></span></p>
+                    <p>Action: <span id="useraction"></span></p>
+                    <p>Contact: <span id="usercontact"></span></p>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
     </div>
 </body>
 
