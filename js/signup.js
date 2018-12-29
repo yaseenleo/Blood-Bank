@@ -16,7 +16,7 @@ signUpBtn.addEventListener('click', () => {
     let password = document.getElementById("password").value;
     let age = document.getElementById("age").value;
     let city = document.getElementById("city").value;
-    let PhoneNumber = document.getElementById("phone").value;
+    let phoneNumber = document.getElementById("phone").value;
     let genders = document.getElementById("gender");
     let gender = genders.options[genders.selectedIndex].value;
     let bloodgroup = document.getElementById("blood");
@@ -38,7 +38,7 @@ if (action == "donor") {
             password,
             age,
             city,
-            PhoneNumber,
+            phoneNumber,
             gender,
             blood,
             action,
@@ -74,7 +74,7 @@ else{
             password,
             age,
             city,
-            PhoneNumber,
+            phoneNumber,
             gender,
             blood,
             action,

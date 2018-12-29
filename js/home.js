@@ -1,6 +1,8 @@
 console.log("home")
 let acceptorArray = [];
 let donorArray = [];
+
+// user donor
 function info(accep) {
     acceptorArray.forEach((acceptor) => {
         if (acceptor.name === accep) {
@@ -12,7 +14,7 @@ function info(accep) {
             let acceptGender = acceptor.gender;
             let acceptBlood = acceptor.blood;
             let acceptAction = acceptor.action;
-            let acceptContact = acceptor.PhoneNumber;
+            let acceptContact = acceptor.phoneNumber;
             let acceptHead = `${acceptAction} Details`;
 
             document.getElementById("userAction").innerHTML = acceptHead;
@@ -31,9 +33,9 @@ function info(accep) {
 function donate(accep) {
     acceptorArray.forEach((acceptor) => {
         if (acceptor.name === accep) {
-           donorArray.push(acceptor)
-           
-           console.log(donorArray);
+            donorArray.push(acceptor)
+
+            console.log(donorArray);
         }
     })
 }
@@ -54,6 +56,64 @@ function show_acceptors() {
     str += '</tbody></table>';
     document.getElementById("acceptors").innerHTML = str;
 }
+
+
+// user acceptor
+function accept(donate) {
+    donorArray.forEach((donor) => {
+        if (donor.name === donate) {
+            donorArray.push(donor)
+
+            console.log(donorArray);
+        }
+    })
+}
+
+function info(donate) {
+    donorArray.forEach((donor) => {
+        if (donor.name === donate) {
+            $('#userinfo').modal('show');
+
+            let donorName = donor.name;
+            let donorEmail = donor.email;
+            let donorAge = donor.age;
+            let donorGender = donor.gender;
+            let donorBlood = donor.blood;
+            let donorAction = donor.action;
+            let donorContact = donor.phoneNumber;
+            let donorHead = `${donorAction} Details`;
+
+            document.getElementById("userAction").innerHTML = donorHead;
+            document.getElementById("username").innerHTML = donorName;
+            document.getElementById("useremail").innerHTML = donorEmail;
+            document.getElementById("userage").innerHTML = donorAge;
+            document.getElementById("usergender").innerHTML = donorGender;
+            document.getElementById("userblood").innerHTML = donorBlood;
+            document.getElementById("useraction").innerHTML = donorAction;
+            document.getElementById("usercontact").innerHTML = donorContact;
+            // alert(JSON.stringify(acceptor));
+        }
+    })
+}
+
+function show_donors() {
+    let str = '<table ><tbody>';
+    donorArray.forEach((donor) => {
+        let user = JSON.stringify(donor);
+        console.log(user)
+        str += `
+            <tr>
+            <th>`+ donor.name + `</th>
+            <td><button onclick="info('`+ donor.name + `')">Info</button></td>
+            <td><button onclick="accept('`+ donor.name + `')">accept</button></td>
+            </tr>
+            `
+    })
+    str += '</tbody></table>';
+    document.getElementById("donors").innerHTML = str;
+}
+
+
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
         // User is signed in.
@@ -112,7 +172,17 @@ firebase.auth().onAuthStateChanged(function (user) {
                 console.log("acceptor," + JSON.stringify(user));
                 console.log(user.name);
                 document.getElementById("name").innerHTML = user.name;
-
+                let allDonors = firebase.database().ref('donorUsers/');
+                allDonors.on('value', function (snapshot) {
+                    let arr = snapshot.val();
+                    for (key in arr) {
+                        arr[key]._uid = key
+                        console.log("something true," + JSON.stringify(arr[key]));
+                        donorArray.push(arr[key]);
+                        show_donors();
+                    }
+                    // console.log(arr);
+                })
             }
 
 
